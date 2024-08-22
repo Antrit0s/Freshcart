@@ -2,6 +2,7 @@ import { useFormik } from "formik";
 import { useState } from "react";
 import * as Yup from "yup";
 import axios from "axios";
+import SecLoader from "../SecLoader/SecLoader";
 
 function CheckoutSession() {
   const [isLoading, setIsLoading] = useState(false);
@@ -135,15 +136,7 @@ function CheckoutSession() {
                   type="submit"
                   disabled={isLoading}
                 >
-                  {isLoading ? (
-                    <span
-                      className="spinner-border spinner-border-sm"
-                      role="status"
-                      aria-hidden="true"
-                    ></span>
-                  ) : (
-                    "Submit"
-                  )}
+                  {isLoading ? <SecLoader /> : "Submit"}
                 </button>
                 {message && (
                   <p
