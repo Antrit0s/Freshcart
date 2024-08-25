@@ -9,6 +9,7 @@ function CartProduct({
   removeCartItem,
   setCartItems,
   getCart,
+  cartId,
 }) {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -139,7 +140,7 @@ function CartProduct({
           </p>
           <hr />
           <Link
-            to="/checkoutsession"
+            to={`checkoutsession/${cartId}`}
             className="bg-blue-500 hover:bg-blue-400 text-white py-2 px-4 rounded-full my-4"
           >
             Checkout

@@ -6,7 +6,7 @@ function Layout() {
   return (
     <>
       <Navbar />
-      <div className=" flex items-center justify-center py-12 min-h-screen">
+      <div className=" flex items-center justify-center mb-5 py-12 min-h-screen">
         <Outlet className=" " />
       </div>
       <div className="fixed bottom-0 left-0 right-0">

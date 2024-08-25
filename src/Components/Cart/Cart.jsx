@@ -16,6 +16,7 @@ function Cart() {
 
   useEffect(() => {
     getCart();
+    console.log(cartId);
   }, []);
 
   async function getCart() {
@@ -28,9 +29,8 @@ function Cart() {
         }
       );
       console.log(data);
-      setCartId(data.data.cartOwner);
-      localStorage.setItem("cartId", cartId);
-
+      localStorage.setItem("cartId", data.data._id);
+      setCartId(data.data._id);
       setCartItems(data.data);
     } catch (error) {
       console.error("Error fetching cart data:", error);
@@ -86,7 +86,19 @@ function Cart() {
         <Loader />
       </div>
     );
-  if (error) return <div>{error}</div>;
+  if (error)
+    return (
+      <div className="container">
+        <div className="flex flex-col gap-3 p-1 dark:text-gray-800">
+          <h2 className="text-center font-bold dark:text-white">
+            Shopping Cart
+          </h2>
+          <div className="bg-white dark:bg-slate-300 p-5 rounded-lg">
+            Empty cart
+          </div>
+        </div>
+      </div>
+    );
 
   return (
     <div className="container">
@@ -103,6 +115,7 @@ function Cart() {
             removeCartItem={removeCartItem}
             setCartItems={setCartItems}
             getCart={getCart}
+            cartId={cartId}
           />
         )}
       </div>

@@ -7,7 +7,7 @@ import SecLoader from "../SecLoader/SecLoader";
 function CheckoutSession() {
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState(null);
-  const [cartId] = useState(localStorage.getItem("cartId"));
+  const cartId = localStorage.getItem("cartId"); // Ensure cartId is correctly stored and retrieved
 
   const formik = useFormik({
     initialValues: {
@@ -24,7 +24,8 @@ function CheckoutSession() {
           { shippingAddress: values },
           {
             headers: { token: localStorage.getItem("token") },
-            params: { url: "https://localhost:5173" }, // Ensure this is correctly configured or remove if unnecessary
+            params: { url: "http://localhost:5173" },
+            // Remove params if not needed
           }
         );
         console.log(res);
@@ -55,106 +56,104 @@ function CheckoutSession() {
     formik;
 
   return (
-    <>
-      <div className="container mx-auto p-4">
-        <div className="max-w-md mx-auto bg-white rounded-lg overflow-hidden md:max-w-xl">
-          <div className="md:flex">
-            <div className="w-full px-6 py-8 md:p-8">
-              <h2 className="text-2xl font-bold text-gray-800">Checkout</h2>
-              <p className="mt-4 text-gray-600">
-                Please fill out the form below to complete your purchase.
-              </p>
-              <form className="mt-6" onSubmit={handleSubmit}>
-                <div className="mb-6">
-                  <label
-                    className="block text-gray-800 font-bold mb-2"
-                    htmlFor="details"
-                  >
-                    Details
-                  </label>
-                  <input
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="details"
-                    name="details"
-                    type="text"
-                    placeholder="Address details"
-                    value={values.details}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    disabled={isLoading}
-                  />
-                  {touched.details && errors.details && (
-                    <p className="text-red-500 mt-1">{errors.details}</p>
-                  )}
-                </div>
-                <div className="mb-6">
-                  <label
-                    className="block text-gray-800 font-bold mb-2"
-                    htmlFor="phone"
-                  >
-                    Phone
-                  </label>
-                  <input
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="phone"
-                    name="phone"
-                    type="tel"
-                    placeholder="01283******"
-                    value={values.phone}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    disabled={isLoading}
-                  />
-                  {touched.phone && errors.phone && (
-                    <p className="text-red-500 mt-1">{errors.phone}</p>
-                  )}
-                </div>
-                <div className="mb-6">
-                  <label
-                    className="block text-gray-800 font-bold mb-2"
-                    htmlFor="city"
-                  >
-                    City
-                  </label>
-                  <input
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="city"
-                    name="city"
-                    type="text"
-                    placeholder="Ex: Cairo"
-                    value={values.city}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    disabled={isLoading}
-                  />
-                  {touched.city && errors.city && (
-                    <p className="text-red-500 mt-1">{errors.city}</p>
-                  )}
-                </div>
-                <button
-                  className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                  type="submit"
-                  disabled={isLoading}
+    <div className="container mx-auto p-4">
+      <div className="max-w-md mx-auto bg-white rounded-lg overflow-hidden md:max-w-xl">
+        <div className="md:flex">
+          <div className="w-full px-6 py-8 md:p-8">
+            <h2 className="text-2xl font-bold text-gray-800">Checkout</h2>
+            <p className="mt-4 text-gray-600">
+              Please fill out the form below to complete your purchase.
+            </p>
+            <form className="mt-6" onSubmit={handleSubmit}>
+              <div className="mb-6">
+                <label
+                  className="block text-gray-800 font-bold mb-2"
+                  htmlFor="details"
                 >
-                  {isLoading ? <SecLoader /> : "Submit"}
-                </button>
-                {message && (
-                  <p
-                    className={`mt-4 ${
-                      message.type === "success"
-                        ? "text-green-500"
-                        : "text-red-500"
-                    }`}
-                  >
-                    {message.text}
-                  </p>
+                  Details
+                </label>
+                <input
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="details"
+                  name="details"
+                  type="text"
+                  placeholder="Address details"
+                  value={values.details}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  disabled={isLoading}
+                />
+                {touched.details && errors.details && (
+                  <p className="text-red-500 mt-1">{errors.details}</p>
                 )}
-              </form>
-            </div>
+              </div>
+              <div className="mb-6">
+                <label
+                  className="block text-gray-800 font-bold mb-2"
+                  htmlFor="phone"
+                >
+                  Phone
+                </label>
+                <input
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  placeholder="01283******"
+                  value={values.phone}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  disabled={isLoading}
+                />
+                {touched.phone && errors.phone && (
+                  <p className="text-red-500 mt-1">{errors.phone}</p>
+                )}
+              </div>
+              <div className="mb-6">
+                <label
+                  className="block text-gray-800 font-bold mb-2"
+                  htmlFor="city"
+                >
+                  City
+                </label>
+                <input
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="city"
+                  name="city"
+                  type="text"
+                  placeholder="Ex: Cairo"
+                  value={values.city}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  disabled={isLoading}
+                />
+                {touched.city && errors.city && (
+                  <p className="text-red-500 mt-1">{errors.city}</p>
+                )}
+              </div>
+              <button
+                className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                type="submit"
+                disabled={isLoading}
+              >
+                {isLoading ? <SecLoader /> : "Submit"}
+              </button>
+              {message && (
+                <p
+                  className={`mt-4 ${
+                    message.type === "success"
+                      ? "text-green-500"
+                      : "text-red-500"
+                  }`}
+                >
+                  {message.text}
+                </p>
+              )}
+            </form>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

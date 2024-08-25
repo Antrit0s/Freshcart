@@ -1,73 +1,21 @@
 import { Link } from "react-router-dom";
-import { FaHeart, FaStar } from "react-icons/fa6";
+import { FaHeart } from "react-icons/fa6";
 import { addToCart } from "../../cartService";
 import SecLoader from "../SecLoader/SecLoader";
 import { useState } from "react";
-import { toast, Bounce } from "react-toastify";
-import axios from "axios";
-function ProductCard({ product, index }) {
-  const [isLoadingSec, setisLoadingSec] = useState(false);
-  const [cartId, setCartId] = useState(localStorage.getItem("cartId" || ""));
-  async function addToCart(product, setisLoadingSec, setCartId, cartId) {
-    let mode = localStorage.theme;
-    try {
-      setisLoadingSec(true);
-      const response = await axios.post(
-        "https://ecommerce.routemisr.com/api/v1/cart",
-        { productId: product._id },
-        { headers: { token: localStorage.getItem("token") } }
-      );
+import { addToFavourite } from "../../addToWishlist";
 
-      const { data } = response;
-      console.log(data);
-      let catId = data.data._id;
-      console.log(catId);
-      setCartId(catId);
-      localStorage.setItem("cartId", catId);
-      toast.success(data.message, {
-        position: "top-right",
-        autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: mode,
-        transition: Bounce,
-      });
-    } catch (error) {
-      setisLoadingSec(false);
-      console.error("Error adding to cart:", error);
+function ProductCard({ product }) {
+  const [isLoadingSec, setIsLoadingSec] = useState(false);
 
-      // Extract error message from the response if available
-      const errorMessage =
-        error.response && error.response.data && error.response.data.message
-          ? error.response.data.message
-          : "Failed to add to cart. Please try again.";
-
-      toast.error(errorMessage, {
-        position: "top-right",
-        autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
-    } finally {
-      setisLoadingSec(false);
-    }
-  }
   return (
-    <div className="product-card align-middle hover:shadow-custom-green rounded-lg  overflow-hidden group">
+    <div className="product-card align-middle hover:shadow-custom-green rounded-lg overflow-hidden group">
       <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 overflow-hidden">
-        <Link to={"/ProductDetails/" + product._id} className="w-52">
+        <Link to={`/ProductDetails/${product._id}`} className="w-52">
           <img
             className="rounded w-full"
-            src={product.imageCover || "/path-to-placeholder.jpg"} // Fallback image if `imageCover` is missing
-            alt={product.title || "Product Image"} // Fallback alt text
+            src={product.imageCover || "/path-to-placeholder.jpg"}
+            alt={product.title || "Product Image"}
           />
         </Link>
         <div className="p-5">
@@ -96,14 +44,15 @@ function ProductCard({ product, index }) {
           </div>
           <div className="flex justify-end gap-3 mt-2">
             <button
-              onClick={() => {
-                addToCart(product, setisLoadingSec, setCartId, cartId);
-              }}
+              onClick={() => addToCart(product, setIsLoadingSec)}
               className="bg-green-300 py-2 px-3 rounded-lg w-3/4 mx-auto translate-y-60 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500"
             >
               {isLoadingSec ? <SecLoader /> : "Add to Cart"}
             </button>
-            <button className="text-gray-400 hover:text-red-500">
+            <button
+              onClick={() => addToFavourite(product)}
+              className="text-gray-400 hover:text-red-500"
+            >
               <FaHeart />
             </button>
           </div>

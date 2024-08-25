@@ -96,7 +96,7 @@ function App() {
           ),
         },
         {
-          path: "checkoutsession",
+          path: "checkoutsession/:cartId",
           element: (
             <ProtectedRoute>
               <CheckoutSession />

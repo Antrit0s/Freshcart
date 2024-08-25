@@ -34,6 +34,7 @@ function Navbar() {
   function signout() {
     setToken("");
     localStorage.removeItem("token");
+    localStorage.removeItem("cartId");
     navigate("/login");
   }
   return (

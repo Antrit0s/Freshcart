@@ -8,8 +8,6 @@ function Home() {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
-    console.log("did mount");
-
     async function getProducts() {
       try {
         setIsLoading(true);

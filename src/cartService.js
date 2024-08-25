@@ -1,9 +1,10 @@
 import { toast, Bounce } from "react-toastify";
 import axios from "axios";
-export async function addToCart(product, setisLoadingSec) {
+
+export async function addToCart(product, setIsLoadingSec) {
   let mode = localStorage.theme;
   try {
-    setisLoadingSec(true);
+    setIsLoadingSec(true);
     const response = await axios.post(
       "https://ecommerce.routemisr.com/api/v1/cart",
       { productId: product._id },
@@ -12,7 +13,8 @@ export async function addToCart(product, setisLoadingSec) {
 
     const { data } = response;
     console.log(data);
-    let catId = data.data._id;
+    const cartId = data.data._id;
+    localStorage.setItem("cartId", cartId);
 
     toast.success(data.message, {
       position: "top-right",
@@ -21,15 +23,12 @@ export async function addToCart(product, setisLoadingSec) {
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
-      progress: undefined,
       theme: mode,
       transition: Bounce,
     });
   } catch (error) {
-    setisLoadingSec(false);
     console.error("Error adding to cart:", error);
 
-    // Extract error message from the response if available
     const errorMessage =
       error.response && error.response.data && error.response.data.message
         ? error.response.data.message
@@ -42,11 +41,10 @@ export async function addToCart(product, setisLoadingSec) {
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
-      progress: undefined,
       theme: "light",
       transition: Bounce,
     });
   } finally {
-    setisLoadingSec(false);
+    setIsLoadingSec(false);
   }
 }
