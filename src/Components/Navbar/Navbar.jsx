@@ -4,6 +4,7 @@ import logo from "../../assets/imgs/logo.svg";
 import { useContext, useEffect, useRef, useState } from "react";
 import { FaMoon, FaSun } from "react-icons/fa6";
 import { TokenContext } from "../../context/TokenContext";
+import ForgetPassword from "./../ForgetPassword/ForgetPassword";
 
 function Navbar() {
   let { token, setToken } = useContext(TokenContext);
@@ -163,6 +164,14 @@ function Navbar() {
                       className="block py-2 px-3 text-white rounded hover:bg-gray-100 lg:hover:bg-transparent lg:hover:text-green-600 lg:p-0 hover:text-green-800 dark:text-white dark:hover:text-green-400"
                     >
                       Register
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/forgetpassword"
+                      className="block py-2 px-3 text-white rounded hover:bg-gray-100 lg:hover:bg-transparent lg:hover:text-green-600 lg:p-0 hover:text-green-800 dark:text-white dark:hover:text-green-400"
+                    >
+                      Forget Password
                     </NavLink>
                   </li>
                 </>

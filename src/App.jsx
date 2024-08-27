@@ -18,6 +18,7 @@ import { ToastContainer } from "react-toastify";
 import CheckoutSession from "./Components/CheckoutSession/CheckoutSession";
 import WishlistProvider from "./context/WishlistContext";
 import AllOrders from "./Components/AllOrders/AllOrders";
+import ForgetPassword from "./Components/ForgetPassword/ForgetPassword";
 
 function App() {
   let router = createBrowserRouter([
@@ -46,6 +47,14 @@ function App() {
           element: (
             <Logged>
               <Register />
+            </Logged>
+          ),
+        },
+        {
+          path: "forgetpassword",
+          element: (
+            <Logged>
+              <ForgetPassword />
             </Logged>
           ),
         },
