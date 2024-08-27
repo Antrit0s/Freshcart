@@ -16,6 +16,8 @@ import Logged from "./Components/LoggedProtectedRoute/Logged";
 import ProductDetails from "./Components/ProductDetails/ProductDetails";
 import { ToastContainer } from "react-toastify";
 import CheckoutSession from "./Components/CheckoutSession/CheckoutSession";
+import WishlistProvider from "./context/WishlistContext";
+import AllOrders from "./Components/AllOrders/AllOrders";
 
 function App() {
   let router = createBrowserRouter([
@@ -103,6 +105,14 @@ function App() {
             </ProtectedRoute>
           ),
         },
+        {
+          path: "allorders",
+          element: (
+            <ProtectedRoute>
+              <AllOrders />
+            </ProtectedRoute>
+          ),
+        },
         { path: "*", element: <Notfound /> },
       ],
     },
@@ -110,22 +120,24 @@ function App() {
 
   return (
     <>
-      <TokenContextProvider>
-        <RouterProvider router={router} />
-        <ToastContainer
-          position="top-right"
-          autoClose={3000}
-          hideProgressBar={false}
-          newestOnTop
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-          transition:Bounce
-        />
-      </TokenContextProvider>
+      <WishlistProvider>
+        <TokenContextProvider>
+          <RouterProvider router={router} />
+          <ToastContainer
+            position="top-right"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+            transition:Bounce
+          />
+        </TokenContextProvider>
+      </WishlistProvider>
     </>
   );
 }

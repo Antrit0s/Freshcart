@@ -19,17 +19,19 @@ function CheckoutSession() {
       setMessage("");
       setIsLoading(true);
       try {
-        const res = await axios.post(
-          `https://ecommerce.routemisr.com/api/v1/orders/checkoutsession/${cartId}`,
+        const { data } = await axios.post(
+          `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=http://localhost:5173`,
           { shippingAddress: values },
           {
             headers: { token: localStorage.getItem("token") },
-            params: { url: "http://localhost:5173" },
-            // Remove params if not needed
           }
         );
-        console.log(res);
+        console.log(data);
+
         setMessage({ type: "success", text: "Submission successful" });
+        setTimeout(() => {
+          window.location.href = data.session.url; // Use the session URL from the data object directly
+        }, 1000);
       } catch (err) {
         setMessage({
           type: "error",

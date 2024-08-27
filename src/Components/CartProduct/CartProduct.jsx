@@ -140,7 +140,7 @@ function CartProduct({
           </p>
           <hr />
           <Link
-            to={`checkoutsession/${cartId}`}
+            to={`/checkoutsession/${cartId}`}
             className="bg-blue-500 hover:bg-blue-400 text-white py-2 px-4 rounded-full my-4"
           >
             Checkout

@@ -1,6 +1,4 @@
 import { useState, createContext } from "react";
-import PropTypes from "prop-types";
-
 export const TokenContext = createContext(0);
 
 export default function TokenContextProvider({ children }) {
@@ -12,7 +10,3 @@ export default function TokenContextProvider({ children }) {
     </TokenContext.Provider>
   );
 }
-
-TokenContextProvider.propTypes = {
-  children: PropTypes.node.isRequired,
-};

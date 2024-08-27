@@ -7,6 +7,7 @@ import { addToFavourite } from "../../addToWishlist";
 
 function ProductCard({ product }) {
   const [isLoadingSec, setIsLoadingSec] = useState(false);
+  const [addedToWishlist, setAddedToWishlist] = useState(false);
 
   return (
     <div className="product-card align-middle hover:shadow-custom-green rounded-lg overflow-hidden group">
@@ -50,8 +51,13 @@ function ProductCard({ product }) {
               {isLoadingSec ? <SecLoader /> : "Add to Cart"}
             </button>
             <button
-              onClick={() => addToFavourite(product)}
-              className="text-gray-400 hover:text-red-500"
+              onClick={() => addToFavourite(product, setAddedToWishlist)}
+              className={
+                addedToWishlist
+                  ? "text-red-500"
+                  : "text-gray-400 hover:text-red-500 cursor-pointer"
+              }
+              disabled={addedToWishlist}
             >
               <FaHeart />
             </button>

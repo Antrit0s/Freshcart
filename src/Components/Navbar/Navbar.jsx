@@ -45,16 +45,14 @@ function Navbar() {
             <img src={logo} alt="logo" />
           </NavLink>
           <div className="flex lg:order-2 space-x-3 lg:space-x-0 rtl:space-x-reverse">
-            <div className="text-white bg-blue-700 font-medium rounded-lg text-sm px-4 py-2 text-center ">
-              <div className=" items-center dark:text-white">
-                <button
-                  onClick={() => {
-                    setIsDark(!isDark);
-                  }}
-                  className="text-center align-middle dark:text-white hover:text-green-400 dark:hover:text-green-400"
-                >
-                  {isDark ? <FaMoon /> : <FaSun />}
-                </button>
+            <div
+              onClick={() => {
+                setIsDark(!isDark);
+              }}
+              className="text-white flex justify-center items-center bg-blue-700 font-medium rounded-lg text-sm px-4 py-2 text-center hover:cursor-pointer hover:text-green-400 dark:hover:text-green-400 "
+            >
+              <div className="  dark:text-white ">
+                {isDark ? <FaMoon /> : <FaSun />}
               </div>
             </div>
             <button
