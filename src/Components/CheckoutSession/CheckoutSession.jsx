@@ -20,7 +20,7 @@ function CheckoutSession() {
       setIsLoading(true);
       try {
         const { data } = await axios.post(
-          `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=http://localhost:5173`,
+          `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=https://freshcart-nu.vercel.app/`,
           { shippingAddress: values },
           {
             headers: { token: localStorage.getItem("token") },
