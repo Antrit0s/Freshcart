@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import ProductCard from "../ProductCard/ProductCard";
 import Loader from "../Loader/Loader";
+import MainSlider from "../MainSlider/MainSlider";
 
 function Home() {
   const [products, setProducts] = useState([]);
@@ -30,7 +31,8 @@ function Home() {
   return (
     <>
       <div className="container my-4">
-        <div className="flex justify-center items-center ">
+        <div className="flex justify-center items-center flex-col ">
+          <MainSlider />
           {isLoading ? (
             <div className="">
               <Loader />
